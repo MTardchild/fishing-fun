@@ -33,11 +33,10 @@ namespace FishingFun
 
             ((Logger)FishingBot.logger.Logger).AddAppender(this);
 
-            this.DataContext = LogEntries = new ObservableCollection<LogEntry>();
-            this.pixelClassifier = new PixelClassifier();
+            DataContext = LogEntries = new ObservableCollection<LogEntry>();
+            pixelClassifier = new PixelClassifier();
             pixelClassifier.SetConfiguration(WowProcess.IsWowClassic());
-             
-            this.bobberFinder = new SearchBobberFinder(pixelClassifier);
+            bobberFinder = new SearchBobberFinder(pixelClassifier);
 
             var imageProvider = bobberFinder as IImageProvider;
             if (imageProvider != null)
@@ -45,17 +44,28 @@ namespace FishingFun
                 imageProvider.BitmapEvent += ImageProvider_BitmapEvent;
             }
 
-            this.biteWatcher = new PositionBiteWatcher(strikeValue);
+            biteWatcher = new PositionBiteWatcher(strikeValue);
+            WindowSizeChangedTimer = new Timer { AutoReset = false, Interval = 100 };
+            WindowSizeChangedTimer.Elapsed += SizeChangedTimer_Elapsed;
+            CardGrid.SizeChanged += MainWindow_SizeChanged;
+            Closing += (s, e) => botThread?.Abort();
 
-            this.WindowSizeChangedTimer = new Timer { AutoReset = false, Interval = 100 };
-            this.WindowSizeChangedTimer.Elapsed += SizeChangedTimer_Elapsed;
-            this.CardGrid.SizeChanged += MainWindow_SizeChanged;
-            this.Closing += (s, e) => botThread?.Abort();
-
-            this.KeyChooser.CastKeyChanged += (s, e) =>
+            CastKeyChooser.KeyChanged += (s, e) =>
             {
-                this.Settings.Focus();
-                this.bot?.SetCastKey(this.KeyChooser.CastKey);
+                Settings.Focus();
+                bot?.SetCastKey(CastKeyChooser.Key);
+            };
+            
+            LureKeyChooser.KeyChanged += (s, e) =>
+            {
+                Settings.Focus();
+                bot?.SetCastKey(LureKeyChooser.Key);
+            };
+            
+            DestroyKeyChooser.KeyChanged += (s, e) =>
+            {
+                Settings.Focus();
+                bot?.SetCastKey(DestroyKeyChooser.Key);
             };
         }
 
@@ -68,17 +78,17 @@ namespace FishingFun
 
         private void SizeChangedTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            this.Dispatch(() =>
+            Dispatch(() =>
             {
-                this.flyingFishAnimation.AnimationWidth = (int)this.ActualWidth;
-                this.flyingFishAnimation.AnimationHeight = (int)this.ActualHeight;
-                this.LogGrid.Height = this.LogFlipper.ActualHeight;
-                this.GraphGrid.Height = this.GraphFlipper.ActualHeight;
-                this.GraphGrid.Visibility = Visibility.Visible;
-                this.GraphFlipper.IsFlipped = true;
-                this.LogFlipper.IsFlipped = true;
-                this.GraphFlipper.IsFlipped = false;
-                this.LogFlipper.IsFlipped = false;
+                flyingFishAnimation.AnimationWidth = (int)ActualWidth;
+                flyingFishAnimation.AnimationHeight = (int)ActualHeight;
+                LogGrid.Height = LogFlipper.ActualHeight;
+                GraphGrid.Height = GraphFlipper.ActualHeight;
+                GraphGrid.Visibility = Visibility.Visible;
+                GraphFlipper.IsFlipped = true;
+                LogFlipper.IsFlipped = true;
+                GraphFlipper.IsFlipped = false;
+                LogFlipper.IsFlipped = false;
             });
         }
 
@@ -86,7 +96,7 @@ namespace FishingFun
 
         private void Settings_Click(object sender, RoutedEventArgs e) => new ColourConfiguration(this.pixelClassifier).Show();
 
-        private void CastKey_Click(object sender, RoutedEventArgs e) => this.KeyChooser.Focus();
+        private void CastKey_Click(object sender, RoutedEventArgs e) => this.CastKeyChooser.Focus();
 
         private void FishingEventHandler(object sender, FishingEvent e)
         {
@@ -164,10 +174,9 @@ namespace FishingFun
 
         public void BotThread()
         {
-            bot = new FishingBot(bobberFinder, this.biteWatcher, KeyChooser.CastKey, new List<ConsoleKey> { ConsoleKey.D5, ConsoleKey.D6 });
+            bot = new FishingBot(bobberFinder, this.biteWatcher, CastKeyChooser.Key, LureKeyChooser.Key, DestroyKeyChooser.Key);
             bot.FishingEventHandler += FishingEventHandler;
             bot.Start();
-
             bot = null;
             SetButtonStates(true);
         }

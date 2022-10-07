@@ -7,15 +7,15 @@ namespace FishingFun
 {
     public partial class KeyBindChooser : UserControl
     {
-        public ConsoleKey CastKey { get; set; } = ConsoleKey.D4;
+        public ConsoleKey Key { get; set; } = ConsoleKey.D4;
 
         private static string Filename = "keybind.txt";
 
-        public EventHandler CastKeyChanged;
+        public EventHandler KeyChanged;
 
         public KeyBindChooser()
         {
-            CastKeyChanged += (s, e) => { };
+            KeyChanged += (s, e) => { };
 
             InitializeComponent();
             ReadConfiguration();
@@ -28,21 +28,21 @@ namespace FishingFun
                 if (File.Exists(Filename))
                 {
                     var contents = File.ReadAllText(Filename);
-                    CastKey = (ConsoleKey)int.Parse(contents);
-                    KeyBind.Text = GetCastKeyText(this.CastKey);
+                    Key = (ConsoleKey)int.Parse(contents);
+                    KeyBind.Text = GetCastKeyText(this.Key);
                 }
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
-                CastKey = ConsoleKey.D4;
-                KeyBind.Text = GetCastKeyText(this.CastKey);
+                Key = ConsoleKey.D4;
+                KeyBind.Text = GetCastKeyText(this.Key);
             }
         }
 
         private void WriteConfiguration()
         {
-            File.WriteAllText(Filename, ((int)CastKey).ToString());
+            File.WriteAllText(Filename, ((int)Key).ToString());
         }
 
         private void CastKey_Focus(object sender, RoutedEventArgs e)
@@ -63,9 +63,9 @@ namespace FishingFun
                 ConsoleKey ck;
                 if (Enum.TryParse<ConsoleKey>(key, out ck))
                 {
-                    this.CastKey = ck;
+                    this.Key = ck;
                     WriteConfiguration();
-                    CastKeyChanged?.Invoke(this, null);
+                    KeyChanged?.Invoke(this, null);
                     return;
                 }
             }
