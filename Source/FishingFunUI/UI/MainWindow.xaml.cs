@@ -96,7 +96,9 @@ namespace FishingFun
 
         private void Settings_Click(object sender, RoutedEventArgs e) => new ColourConfiguration(this.pixelClassifier).Show();
 
-        private void CastKey_Click(object sender, RoutedEventArgs e) => this.CastKeyChooser.Focus();
+        private void CastKey_Click(object sender, RoutedEventArgs e) => CastKeyChooser.Focus();
+        private void LureKey_Click(object sender, RoutedEventArgs e) => LureKeyChooser.Focus();
+        private void DestroyKey_Click(object sender, RoutedEventArgs e) => DestroyKeyChooser.Focus();
 
         private void FishingEventHandler(object sender, FishingEvent e)
         {

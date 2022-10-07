@@ -96,7 +96,7 @@
                         Background="Transparent">
                     <Grid>
                         <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="CastKeyChooser" />
+                        <local:KeyBindChooser x:Name="CastKeyChooser" Focusable="True" />
                     </Grid>
                 </Button>
                 <Button Name="LureKey"
@@ -107,12 +107,12 @@
                         VerticalAlignment="Top" 
                         Width="50" 
                         ToolTip="Lure key - click to change" 
-                        Click="CastKey_Click" 
+                        Click="LureKey_Click" 
                         BorderThickness="0" 
                         Background="Transparent">
                     <Grid>
                         <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="LureKeyChooser" />
+                        <local:KeyBindChooser x:Name="LureKeyChooser" Focusable="True" />
                     </Grid>
                 </Button>
                 <Button Name="DestroyKey" 
@@ -123,12 +123,12 @@
                         VerticalAlignment="Top" 
                         Width="50" 
                         ToolTip="Destroy key - click to change" 
-                        Click="CastKey_Click" 
+                        Click="DestroyKey_Click" 
                         BorderThickness="0" 
                         Background="Transparent">
                     <Grid>
                         <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="DestroyKeyChooser" />
+                        <local:KeyBindChooser x:Name="DestroyKeyChooser" Focusable="True" />
                     </Grid>
                 </Button>
             </WrapPanel>
