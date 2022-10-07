@@ -1,3 +1,17 @@
+# Fork Changes
+
+## Requirements
+
+- [Dejunk](https://www.curseforge.com/wow/addons/dejunk) Addon
+- Macro that uses the following command: `/dejunk destroy start` (Destroys one item at a time, see below)
+
+## Features
+
+- Finer sleep times (25ms instead of 100ms)
+- Added a tooltip to the delay slider
+- Incorporation of [Dejunk](https://www.curseforge.com/wow/addons/dejunk) to easily customize the list of items to destroy during fishing
+  - Has to be executed multiple times to work properly (see this [Issue](https://github.com/moody/Dejunk/issues/114))
+
 
 # Fishing Fun - A World of Warcraft Bot
 
