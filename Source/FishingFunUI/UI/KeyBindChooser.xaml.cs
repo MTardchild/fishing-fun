@@ -82,5 +82,10 @@ namespace FishingFun
             }
             return "?";
         }
+
+        private void KeyBindChooser_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            KeyBind.Focus();
+        }
     }
 }

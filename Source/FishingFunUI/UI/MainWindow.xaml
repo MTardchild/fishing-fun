@@ -95,8 +95,8 @@
                         BorderThickness="0" 
                         Background="Transparent">
                     <Grid>
-                        <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="CastKeyChooser" Focusable="True" />
+                        <Image Source="/Chrome;component/Resources/btn_fishing.png" Style="{StaticResource HQRender}" />
+                        <local:KeyBindChooser x:Name="CastKeyChooser" Focusable="True" Foreground="White" />
                     </Grid>
                 </Button>
                 <Button Name="LureKey"
@@ -111,8 +111,8 @@
                         BorderThickness="0" 
                         Background="Transparent">
                     <Grid>
-                        <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="LureKeyChooser" Focusable="True" />
+                        <Image Source="/Chrome;component/Resources/btn_lure.png" Style="{StaticResource HQRender}" />
+                        <local:KeyBindChooser x:Name="LureKeyChooser" Focusable="True" Foreground="White" />
                     </Grid>
                 </Button>
                 <Button Name="DestroyKey" 
@@ -127,8 +127,8 @@
                         BorderThickness="0" 
                         Background="Transparent">
                     <Grid>
-                        <Image Source="/Chrome;component/Resources/Button.png" Style="{StaticResource HQRender}" />
-                        <local:KeyBindChooser x:Name="DestroyKeyChooser" Focusable="True" />
+                        <Image Source="/Chrome;component/Resources/btn_destroy.png" Style="{StaticResource HQRender}" />
+                        <local:KeyBindChooser x:Name="DestroyKeyChooser" Focusable="True" Foreground="White" />
                     </Grid>
                 </Button>
             </WrapPanel>

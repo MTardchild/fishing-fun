@@ -6,9 +6,11 @@
              xmlns:local="clr-namespace:FishingFun"
              mc:Ignorable="d" 
              d:DesignHeight="64" 
-             d:DesignWidth="64">
-    <Grid Name="grid1">
-        <TextBox Foreground="Black" 
+             d:DesignWidth="64"
+             Foreground="Black"
+             GotFocus="KeyBindChooser_OnGotFocus">
+    <Grid>
+        <TextBox Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                  KeyUp="KeyBind_KeyUp" 
                  GotFocus="CastKey_Focus" 
                  MaxLength="1" 
