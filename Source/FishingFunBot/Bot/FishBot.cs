@@ -20,6 +20,7 @@ namespace FishingFun
         private bool isEnabled;
         private Stopwatch stopwatch = new Stopwatch();
         private static Random random = new Random();
+        private int maxWaitTime = 200;
 
         public event EventHandler<FishingEvent> FishingEventHandler;
 
@@ -38,9 +39,7 @@ namespace FishingFun
         public void Start()
         {
             biteWatcher.FishingEventHandler = (e) => FishingEventHandler?.Invoke(this, e);
-
             isEnabled = true;
-
             DoTenMinuteKey();
 
             while (isEnabled)
@@ -48,14 +47,10 @@ namespace FishingFun
                 try
                 {
                     logger.Info($"Pressing key {castKey} to Cast.");
-
                     PressTenMinKeyIfDue();
-
                     FishingEventHandler?.Invoke(this, new FishingEvent { Action = FishingAction.Cast });
                     WowProcess.PressKey(castKey);
-
                     Watch(2000);
-
                     WaitForBite();
                 }
                 catch (Exception e)
@@ -113,7 +108,7 @@ namespace FishingFun
                 var currentBobberPosition = FindBobber();
                 if (currentBobberPosition == Point.Empty || currentBobberPosition.X == 0) { return; }
 
-                if (this.biteWatcher.IsBite(currentBobberPosition))
+                if (biteWatcher.IsBite(currentBobberPosition))
                 {
                     Loot(bobberPosition);
                     PressTenMinKeyIfDue();
@@ -167,16 +162,15 @@ namespace FishingFun
             WowProcess.RightClickMouse(logger, bobberPosition);
         }
 
-        public static void Sleep(int ms)
+        public void Sleep(int ms)
         {
-            ms+=random.Next(0, 225);
-
+            ms += random.Next(0, maxWaitTime);
             Stopwatch sw = new Stopwatch();
             sw.Start();
             while (sw.Elapsed.TotalMilliseconds < ms)
             {
                 FlushBuffers();
-                Thread.Sleep(100);
+                Thread.Sleep(25);
             }
         }
 

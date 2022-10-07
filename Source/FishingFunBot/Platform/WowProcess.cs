@@ -18,13 +18,13 @@ namespace FishingFun
         private const UInt32 WM_KEYUP = 0x0101;
         private static ConsoleKey lastKey;
         private static Random random = new Random();
-        public static int LootDelay=2000;
+        public static int LootDelay = 500;
 
 
         public static bool IsWowClassic()
         {
             var wowProcess = Get();
-            return wowProcess != null ? wowProcess.ProcessName.ToLower().Contains("classic") : false; ;
+            return wowProcess != null ? wowProcess.ProcessName.ToLower().Contains("classic") : false;
         }
 
         //Get the wow-process, if success returns the process else null
