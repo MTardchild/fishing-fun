@@ -72,7 +72,18 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Margin="0 11 0 0">Loot Delay:</Label>
-                <Slider x:Name="LootDelay" Width="100" Margin="0 11 0 0" Foreground="Blue" ValueChanged="LootDelay_ValueChanged" Minimum="0" Maximum="3500" Orientation="Horizontal" TickFrequency="500" Value="{Binding LootDelay}" TickPlacement="BottomRight" />
+                <Slider x:Name="LootDelay"
+                        Width="100"
+                        AutoToolTipPlacement="TopLeft"
+                        Margin="0 11 0 0"
+                        Foreground="Blue"
+                        ValueChanged="LootDelay_ValueChanged"
+                        Minimum="0"
+                        Maximum="3500"
+                        Orientation="Horizontal"
+                        TickFrequency="500"
+                        Value="{Binding LootDelay}"
+                        TickPlacement="BottomRight" />
             </StackPanel>
         </Grid>
     </Grid>
