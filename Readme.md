@@ -7,6 +7,7 @@
 
 ## Features
 
+- Separate shortcut buttons for casting fishing, applying lure, destroying items
 - Finer sleep times (25ms instead of 100ms)
 - Added a tooltip to the delay slider
 - Incorporation of [Dejunk](https://www.curseforge.com/wow/addons/dejunk) to easily customize the list of items to destroy during fishing
