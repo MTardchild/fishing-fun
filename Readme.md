@@ -12,6 +12,11 @@
 - Incorporation of [Dejunk](https://www.curseforge.com/wow/addons/dejunk) to easily customize the list of items to destroy during fishing
   - Has to be executed multiple times to work properly (see this [Issue](https://github.com/moody/Dejunk/issues/114))
 
+## Configuration
+
+- Add unwanted items to Dejunk
+- Set the key shortcuts accordingly
+- Everything else remains the same
 
 # Fishing Fun - A World of Warcraft Bot
 
